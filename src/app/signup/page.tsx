@@ -35,6 +35,14 @@ export default function SignupPage() {
           Un email de confirmation a été envoyé à <strong>{email}</strong>.
           Clique sur le lien pour activer ton compte, puis connecte-toi.
         </Alert>
+        <p className="text-sm text-neutral-500">
+          Tu as déjà un compte (par ex. via GitHub) avec cette adresse ? Aucun
+          mail ne sera envoyé :{" "}
+          <Link href="/login" className="underline">
+            connecte-toi avec cette méthode
+          </Link>
+          .
+        </p>
         <Button variant="secondary" onClick={() => (window.location.href = "/login")}>
           Aller à la connexion
         </Button>
