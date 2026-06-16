@@ -1,0 +1,33 @@
+name: CI (build)
+
+# Vérifie que le front compile (types + build Next) à chaque push / PR.
+# Pas de packages @replang-app ici → aucun token registre nécessaire.
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Installer les dépendances
+        run: npm install
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build Next
+        run: npm run build
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
